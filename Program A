@@ -1,0 +1,14 @@
+def display_file_with_line_numbers(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+            for i, line in enumerate(lines, start=1):
+                print(f"{i}: {line.strip()}")
+    except FileNotFoundError:
+        print(f"The file at {file_path} was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+# Example usage:
+file_path = 'example.txt'
+display_file_with_line_numbers(file_path)
