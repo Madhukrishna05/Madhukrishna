@@ -1,0 +1,15 @@
+def copy_and_convert_to_uppercase(source_file, destination_file):
+    try:
+        with open(source_file, 'r') as src:
+            content = src.read()
+        upper_content = content.upper()
+        with open(destination_file, 'w') as dest:
+            dest.write(upper_content)
+        print(f"Contents copied from {source_file} to {destination_file} with all lowercase characters converted to uppercase.")
+    except FileNotFoundError:
+        print(f"Error: The file {source_file} does not exist.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+source_file_path = 'source.txt'
+destination_file_path = 'destination.txt'
+copy_and_convert_to_uppercase(source_file_path, destination_file_path)
