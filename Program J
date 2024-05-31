@@ -1,0 +1,13 @@
+def process_text_file(input_file, output_file):
+    with open(input_file, 'r') as f_in, open(output_file, 'w') as f_out:
+        for line in f_in:
+            words = line.split()
+            updated_line = ' '.join(word if word.lower() not in {"a", "the", "an"} else ' ' for word in words)
+            f_out.write(updated_line + '\n')
+def main():
+    input_file = "input_text.txt"  # Replace with your input file name
+    output_file = "output_text.txt"  # Replace with your output file name
+    process_text_file(input_file, output_file)
+    print("Text processing completed.")
+if __name__ == "__main__":
+    main()
