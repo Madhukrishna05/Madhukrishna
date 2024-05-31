@@ -1,0 +1,21 @@
+import pickle
+class Employee:
+    def __init__(self, emp_code, emp_name, join_date, salary):
+        self.emp_code = emp_code
+        self.emp_name = emp_name
+        self.join_date = join_date
+        self.salary = salary
+def serialize_employee(emp):
+    with open('employee_data.pickle', 'wb') as f:
+        pickle.dump(emp, f)
+def deserialize_employee():
+    with open('employee_data.pickle', 'rb') as f:
+        emp = pickle.load(f)
+    return emp
+employee = Employee("001", "John Doe", "2024-01-01", 50000)
+serialize_employee(employee)
+deserialized_employee = deserialize_employee()
+print("Employee Code:", deserialized_employee.emp_code)
+print("Employee Name:", deserialized_employee.emp_name)
+print("Date of Joining:", deserialized_employee.join_date)
+print("Salary:", deserialized_employee.salary)
