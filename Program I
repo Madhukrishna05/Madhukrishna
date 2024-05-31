@@ -1,0 +1,38 @@
+def read_master_file(file_name):
+    students = []
+    with open(file_name, 'r') as file:
+        for line in file:
+            roll_number, name = line.strip().split(',')
+            students.append((int(roll_number), name))
+    return students
+def read_transaction_file(file_name):
+    transactions = []
+    with open(file_name, 'r') as file:
+        for line in file:
+            roll_number, action = line.strip().split(',')
+            transactions.append((int(roll_number), action))
+    return transactions
+def update_student_list(master_students, transactions):
+    updated_students = master_students[:]
+    for roll_number, action in transactions:
+        if action == 'add':
+            updated_students.append((roll_number, "New Student"))
+        elif action == 'delete':
+            updated_students = [(r, n) for r, n in updated_students if r != roll_number]
+    updated_students.sort(key=lambda x: x[0])
+    return updated_students
+def write_updated_file(file_name, updated_students):
+    with open(file_name, 'w') as file:
+        for roll_number, name in updated_students:
+            file.write(f"{roll_number},{name}\n")
+def main():
+    master_file_name = "master_file.txt"  # Replace with your master file name
+    transaction_file_name = "transaction_file.txt"  # Replace with your transaction file name
+
+    master_students = read_master_file(master_file_name)
+    transactions = read_transaction_file(transaction_file_name)
+    updated_students = update_student_list(master_students, transactions)
+    updated_file_name = "updated_student_list.txt"  # Replace with your updated file name
+    write_updated_file(updated_file_name, updated_students)
+if __name__ == "__main__":
+    main()
