@@ -1,0 +1,18 @@
+def read_and_sort_student_records(file_path):
+    students = []
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                name, age = line.strip().split(',')
+                students.append({'name': name.strip(), 'age': int(age.strip())})
+        sorted_students = sorted(students, key=lambda student: student['name'])
+        for student in sorted_students:
+            print(f"Name: {student['name']}, Age: {student['age']}")
+    except FileNotFoundError:
+        print(f"The file at {file_path} was not found.")
+    except ValueError:
+        print("There was an error in the formatting of the file. Each line should contain a name and age separated by a comma.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+file_path = 'students.txt'
+read_and_sort_student_records(file_path)
