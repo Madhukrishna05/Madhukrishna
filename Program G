@@ -1,0 +1,33 @@
+def read_donor_file(file_name):
+    donors = []
+    with open(file_name, 'r') as file:
+        for line in file:
+            name = line[:20].strip()
+            address = line[20:60].strip()
+            age = int(line[60:62])
+            blood_type = int(line[62])
+            donors.append((name, address, age, blood_type))
+    return donors
+def filter_donors(donors):
+    filtered_donors = []
+    for donor in donors:
+        name, address, age, blood_type = donor
+        if age < 25 and blood_type == 2:
+            filtered_donors.append(donor)
+    return filtered_donors
+def print_donors(donors):
+    if donors:
+        print("List of blood donors below 25 years old with blood type 2:")
+        print("Name\t\tAddress\t\tAge\tBlood Type")
+        for donor in donors:
+            name, address, age, blood_type = donor
+            print(f"{name}\t{address}\t{age}\t{blood_type}")
+    else:
+        print("No matching donors found.")
+def main():
+    file_name = "blood_donors.txt"  # Replace with your file name
+    donors = read_donor_file(file_name)
+    filtered_donors = filter_donors(donors)
+    print_donors(filtered_donors)
+if __name__ == "__main__":
+    main()
